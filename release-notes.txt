@@ -1,0 +1,100 @@
+=============================================
+Telengard Remastered v1.1
+=============================================
+
+Bugfixes
+
+	- Fixed bug where character sheet didn't update spell points in the inn
+	- Fixed bug where walls weren't properly detected when evading a monster
+	- Fixed stack overflow bug caused by too many FOR/NEXT levels due to the
+	    fountain animation being left running when presented with command prompt
+
+Modifcations
+
+	- Modified monster progression to progressively increment minimum monster level
+	    as the dungeon level increases.  Minimum monster level is half the dungeon
+	    level + 1 rounded down.
+	- Tweaked hobbit chance to steal to include monster level in steal chance
+	- Tweaked Elven cloak to oppose 1d20+MonsterLevel instead of 1d20 and to give
+	    bonuses to more powerful monster types on their checks to detect you
+
+=============================================
+Telengard Remastered v1.0
+=============================================
+
+New Features
+
+	- Character Name:
+		- "sv" still used to indicate saveable character but not visible to player
+		- ".plr" extenstion removed
+		- More characters supported
+			- Formerly only A-Z and 0-9 were supported
+			- Currently A-Z, a-z, 0-9, and space are supported
+		- Name length changed
+			- Formerly
+				30 characters (max) in file
+				16 characters (max) in filename
+				4 characters used for extension
+				2 character used for save prefix
+				first 7 characters displayed on screen
+				  (includes save prefix for display)
+			- Currently
+				16 characters (max) in file
+				16 characters (max) in filename
+				0 characters used for extension
+				2 character used for save prefix (not included in filename)
+				All characters except leading "sv" are displayed on screen
+
+	- Character Load Menu
+		- Reads first 20 characters from disk and lists them on screen
+		- Use Up/Down cursor keys to select character
+		- Commands:
+			'RET' - load a character
+			'D'   - delete a character
+			'B'   - go back to main menu
+
+	- Enhanced Graphics
+		- The player graphic uses three sprites or 1 sprite and character graphics
+		    depending on the situation
+		- Doors are now gray to better differentiate them from walls
+		- There are 3 to 4 sprites per monster instead of the original 1
+		- Room features, treasure, and the inn now use multiple sprites
+		- The Inn and Altar use character graphics in addition to sprites
+		- 64 custom character graphics are now defined instead of the original 3
+		- Spell effects formerly using special characters now use sprites instead
+
+	- Enhanced UI
+		- Character Sheet uses varying colors to make it more readable
+		- Highlighted letters and words are now done in a different color
+		- Run/Stop pauses the game any time a key press is expected
+		- Clear keyboard buffer before reading key presses to avoid accidental actions
+		- Support for lower case characters
+		- Spell effect status line updates the same turn a spell is cast and on every turn
+		    even if you stay in the same spot
+		- Light spell takes effect immediately without need for re-plot
+		- Lower case characters are now supported
+
+	- Improved Performance
+		- Re-plot is done entirely in machine language
+		- Sprite handler is entirely in machine language
+		- Light spell renderer is entirely in machine language
+
+	- Improved Memory Usage
+		- Sprites are all contained in Vic-II Bank 3 instead of slotting in monster sprites
+		    from Bank 1
+		- BASIC code has been moderately crunched
+			- Most frequently referenced subroutines moved to lowest number lines
+			- lines renumbered starting at 1 and incremented by 1
+			- unused/non-functional expressions and lines removed
+		- Memory locations 679 - 766 are used for machine language routine workspace
+
+	- Gameplay
+		- More Dungeon Levels
+			- Former limit: 50
+			- Current limit: 250
+		- Made item bonuses more agressive to make lower levels more playable
+		- Moved random seed generator to after first keypress to give a more random feel between loads
+		- Action delay reduced from 1.5 seconds to 1.0 seconds to speed up gameplay a little
+		- Location Tracking
+			- Tracking last 100 locations visited
+			- No non-monster treasure is found if current coordinates are on that list
